@@ -9,20 +9,37 @@
 </head>
 
 <body>
-    <h1>Halloween</h1>
+    <h1>Halloween Constume Contest</h1>
     <div id="contestants"></div>
+    <table id="tableBody">
+        <tr>
+            <th>
+                Contestant Name
+            </th>
+            <th>
+                Costume
+            </th>
+        </tr>
+    </table>
     <script>
         document.onload = displayContestants();
 
         async function displayContestants() {
             const contestants = await fetchContestants();
-            const contestantsList = document.getElementById("contestants");
+            const tableBody = document.getElementById("tableBody");
             
             contestants.map((c) => {
+                const tr = document.createElement("tr");
+                const td1 = document.createElement("td");
+                td1.innerText = c.name;
+                tr.appendChild(td1);
+                const td2 = document.createElement("td");
                 const img = document.createElement("img");
                 img.src = c.costumeImgUrl;
                 img.height = 150;
-                contestantsList.appendChild(img);
+                td2.appendChild(img);
+                tr.appendChild(td2)
+                tableBody.appendChild(tr)
             })
 
         }
