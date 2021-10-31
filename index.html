@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Halloween constume contest</title>
+</head>
+
+<body>
+    <h1>Halloween</h1>
+    <div id="contestants"></div>
+    <script>
+        document.onload = displayContestants();
+
+        async function displayContestants() {
+            const contestants = await fetchContestants();
+            const contestantsList = document.getElementById("contestants");
+            
+            contestants.map((c) => {
+                const img = document.createElement("img");
+                img.src = c.costumeImgUrl;
+                img.height = 150;
+                contestantsList.appendChild(img);
+            })
+
+        }
+
+
+        function fetchContestants() {
+            baseUrl = 'https://6c841112-7c87-47ef-a956-03b6484aa343.mock.pstmn.io'
+            const requestOptions = {
+                method: 'GET',
+                redirect: 'follow'
+            };
+
+            return fetch(`${baseUrl}/contestants`, requestOptions)
+                .then(response => response.json())
+                .catch(error => console.log('error', error));
+
+        }
+    </script>
+</body>
+
+</html>
