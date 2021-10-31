@@ -31,7 +31,14 @@
             contestants.map((c) => {
                 const tr = document.createElement("tr");
                 const td1 = document.createElement("td");
-                td1.innerText = c.name;
+                const button = document.createElement("button");
+                button.onclick = function() {
+                    const p = document.createElement("p");
+                    p.innerText= displayContents(c);
+                    td1.appendChild(p)
+                }
+                button.innerText= c.name;
+                td1.appendChild(button)
                 tr.appendChild(td1);
                 const td2 = document.createElement("td");
                 const img = document.createElement("img");
@@ -44,6 +51,9 @@
 
         }
 
+        function displayContents(c) {
+            return `id: ${c.id} \n name: ${c.name} \n votes: ${c.votes} \n costumeTitle: ${c.costumeTitle} \n city: ${c.city}`
+        }
 
         function fetchContestants() {
             baseUrl = 'https://6c841112-7c87-47ef-a956-03b6484aa343.mock.pstmn.io'
